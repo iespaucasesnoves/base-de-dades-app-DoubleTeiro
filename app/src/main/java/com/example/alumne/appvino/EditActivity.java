@@ -11,7 +11,7 @@ import java.sql.SQLException;
 
 public class EditActivity extends Activity implements View.OnClickListener {
     Button buttonAfegir, buttonActualitzar;
-    EditText editNom, editAnada, editTipus, editLloc, editGraduacio, editData, editComentari, editBodega, editDenominacio, editPreu, editValOlfa, editValGusta, editValVisual, editNota;
+    EditText editID, editNom, editAnada, editTipus, editLloc, editGraduacio, editData, editComentari, editBodega, editDenominacio, editPreu, editValOlfa, editValGusta, editValVisual, editNota, editFoto;
     DataSourceVi bd;
 
     @Override
@@ -19,9 +19,21 @@ public class EditActivity extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
 
-        editTextNomVi = (EditText) findViewById(R.id.editTextNomVi);
-        editTextData = (EditText) findViewById(R.id.editTextData);
-        editTextTipus = (EditText) findViewById(R.id.editTextTipus);
+        editNom = (EditText) findViewById(R.id.editNomVi);
+        editAnada= (EditText) findViewById(R.id.editAnada);
+        editTipus = (EditText) findViewById(R.id.editTextTipus);
+        editLloc = (EditText) findViewById(R.id.editTextLloc);
+        editGraduacio = (EditText) findViewById(R.id.editGraduacio);
+        editData = (EditText) findViewById(R.id.editData);
+        editComentari = (EditText) findViewById(R.id.editComentari);
+        editBodega = (EditText) findViewById(R.id.editBodega);
+        editDenominacio = (EditText) findViewById(R.id.editDenominacio);
+        editPreu = (EditText) findViewById(R.id.editPreu);
+        editValOlfa = (EditText) findViewById(R.id.editValOlfa);
+        editValGusta = (EditText) findViewById(R.id.editValGusta);
+        editValVisual = (EditText) findViewById(R.id.editValVisual);
+        editNota = (EditText) findViewById(R.id.editNota);
+        editFoto = (EditText) findViewById(R.id.editFoto);
 
         buttonAfegir = (Button) findViewById(R.id.buttonAfegir);
         buttonAfegir.setOnClickListener(this);
@@ -31,6 +43,33 @@ public class EditActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+        String value= editNota.getText().toString();
+        int nota = Integer.parseInt(value);
+        String value2 = editBodega.getText().toString();
+        long bodega = Long.parseLong(value2);
+        String value3 = editDenominacio.getText().toString();
+        long denominacio = Long.parseLong(value3);
+        String value4 = editNota.getText().toString();
+        float preu = Float.parseFloat(value4);
+
+        Vi vino = new Vi();
+
+        vino.setNomVi(editNom.getText().toString());
+        vino.setAnada(editAnada.getText().toString());
+        vino.setLloc(editLloc.getText().toString());
+        vino.setTipus(editTipus.getText().toString());
+        vino.setGraduacio(editGraduacio.getText().toString());
+        vino.setData( editData.getText().toString());
+        vino.setComentari(editComentari.getText().toString());
+        vino.setIdBodega(bodega);
+        vino.setIdDenominacio(denominacio);
+        vino.setPreu(preu);
+        vino.setValOlfativa(editValOlfa.getText().toString());
+        vino.setValGustativa(editValGusta.getText().toString());
+        vino.setValVisual(editValVisual.getText().toString());
+        vino.setNota(nota);
+        vino.setFoto(editFoto.getText().toString());
+
         if (v == buttonAfegir){
             //Obrim la base de dades
             bd = new DataSourceVi(this);
@@ -40,17 +79,11 @@ public class EditActivity extends Activity implements View.OnClickListener {
                 e.printStackTrace();
             }
 
-            //Inserim el contacte
-
-            if (bd.createVi(editTextNomVi.getText().toString(), editTextData.getText().toString(), editTextTipus.getText().toString()) != -1) {
-                Toast.makeText(this, "Afegit correctament", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(this, "Error a l’afegir", Toast.LENGTH_SHORT).show();
-            }
+            bd.createVi(vino);
             bd.close();
             finish();
-
         }
+
         else if (v == buttonActualitzar){
             long id;
 
@@ -62,11 +95,8 @@ public class EditActivity extends Activity implements View.OnClickListener {
                 e.printStackTrace();
             }
 
-            //Identificador de la caixa de text
-            id = Long.parseLong(editID.getText().toString());
-
             //Crida a la BD
-            boolean result = bd.updateVi(id, editNom.getText().toString(), editEmail.getText().toString());
+            boolean result = bd.updateVi(vino);
 
             //Comprovem el resultat, si s’ha pogut actualitzar la BD o no
             if (result)
