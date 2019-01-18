@@ -11,7 +11,7 @@ import java.sql.SQLException;
 
 public class EditActivity extends Activity implements View.OnClickListener {
     Button buttonAfegir, buttonActualitzar;
-    EditText editID, editNom, editAnada, editTipus, editLloc, editGraduacio, editData, editComentari, editBodega, editDenominacio, editPreu, editValOlfa, editValGusta, editValVisual, editNota, editFoto;
+    EditText editNom, editAnada, editTipus, editLloc, editGraduacio, editData, editComentari, editBodega, editDenominacio, editPreu, editValOlfa, editValGusta, editValVisual, editNota, editFoto;
     DataSourceVi bd;
 
     @Override
@@ -85,7 +85,6 @@ public class EditActivity extends Activity implements View.OnClickListener {
         }
 
         else if (v == buttonActualitzar){
-            long id;
 
             //Obtenim la BD
             bd = new DataSourceVi(this);
@@ -94,7 +93,7 @@ public class EditActivity extends Activity implements View.OnClickListener {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-
+            
             //Crida a la BD
             boolean result = bd.updateVi(vino);
 
