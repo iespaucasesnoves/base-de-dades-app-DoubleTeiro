@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,9 +9,9 @@
         android:id="@+id/buttonAfegir"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="76dp"
-        android:layout_marginLeft="76dp"
-        android:layout_marginTop="428dp"
+        android:layout_marginStart="72dp"
+        android:layout_marginLeft="72dp"
+        android:layout_marginTop="420dp"
         android:text="Afegir"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -21,14 +20,15 @@
         android:id="@+id/buttonActualitzar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="428dp"
-        android:layout_marginEnd="44dp"
-        android:layout_marginRight="44dp"
+        android:layout_marginTop="420dp"
+        android:layout_marginEnd="72dp"
+        android:layout_marginRight="72dp"
         android:text="Actualitzar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="368dp"
         android:layout_height="413dp"
         android:layout_marginStart="8dp"
@@ -52,8 +52,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Nom" />
+                android:hint="Nom"
+                android:inputType="textPersonName" />
 
             <EditText
                 android:id="@+id/editAnada"
@@ -61,8 +61,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Anada" />
+                android:hint="Anada"
+                android:inputType="textPersonName" />
         </LinearLayout>
 
         <LinearLayout
@@ -76,8 +76,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Tipus" />
+                android:hint="Tipus"
+                android:inputType="textPersonName" />
 
             <EditText
                 android:id="@+id/editTextLloc"
@@ -85,8 +85,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Lloc" />
+                android:hint="Lloc"
+                android:inputType="textPersonName" />
         </LinearLayout>
 
         <LinearLayout
@@ -100,8 +100,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Graduacio" />
+                android:hint="Graduacio"
+                android:inputType="textPersonName" />
 
             <EditText
                 android:id="@+id/editData"
@@ -109,8 +109,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Data" />
+                android:hint="Data"
+                android:inputType="textPersonName" />
         </LinearLayout>
 
         <LinearLayout
@@ -124,8 +124,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Comentari" />
+                android:hint="Comentari"
+                android:inputType="textPersonName" />
 
             <EditText
                 android:id="@+id/editBodega"
@@ -133,8 +133,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="ID Bodega" />
+                android:hint="ID Bodega"
+                android:inputType="textPersonName" />
         </LinearLayout>
 
         <LinearLayout
@@ -148,8 +148,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="ID Denom" />
+                android:hint="ID Denom"
+                android:inputType="textPersonName" />
 
             <EditText
                 android:id="@+id/editPreu"
@@ -157,8 +157,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Preu" />
+                android:hint="Preu"
+                android:inputType="textPersonName" />
         </LinearLayout>
 
         <LinearLayout
@@ -172,8 +172,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="V. Olfativa" />
+                android:hint="V. Olfativa"
+                android:inputType="textPersonName" />
 
             <EditText
                 android:id="@+id/editValGusta"
@@ -181,8 +181,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="V. Gustativa" />
+                android:hint="V. Gustativa"
+                android:inputType="textPersonName" />
         </LinearLayout>
 
         <LinearLayout
@@ -196,8 +196,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="V. Visual" />
+                android:hint="V. Visual"
+                android:inputType="textPersonName" />
 
             <EditText
                 android:id="@+id/editNota"
@@ -205,8 +205,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Nota" />
+                android:hint="Nota"
+                android:inputType="textPersonName" />
         </LinearLayout>
 
         <EditText
@@ -214,9 +214,25 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Foto" />
+            android:hint="Foto"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/ID"
+            android:layout_width="186dp"
+            android:layout_height="30dp" />
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/buttonDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="156dp"
+        android:layout_marginRight="156dp"
+        android:text="Delete"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
 </android.support.constraint.ConstraintLayout>

@@ -1,6 +1,5 @@
 package com.example.alumne.appvino;
 
-import android.app.ListActivity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -74,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
             map.put("id", String.valueOf(vi.getId()));
             map.put("nomVi", vi.getNomVi());
             map.put("data", vi.getData());
-            map.put("tipus", vi.getTipus());
+            map.put("anada", vi.getAnada());
             llista.add(map);
         }
 
@@ -83,8 +82,8 @@ public class MainActivity extends AppCompatActivity {
 
         //Assignar a la listview
         adapter = new SimpleAdapter(this, llista,R.layout.llistavins,
-                new String[]{"id", "nomVi", "data", "tipus"},
-                new int[]{R.id.id, R.id.nomVi, R.id.data, R.id.tipus});
+                new String[]{"id", "nomVi", "data", "anada"},
+                new int[]{R.id.id, R.id.nomVi, R.id.data, R.id.anada});
         lv.setAdapter(adapter);
     }
 

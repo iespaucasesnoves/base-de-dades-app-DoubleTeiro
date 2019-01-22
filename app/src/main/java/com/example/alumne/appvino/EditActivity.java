@@ -5,13 +5,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.sql.SQLException;
 
 public class EditActivity extends Activity implements View.OnClickListener {
-    Button buttonAfegir, buttonActualitzar;
+    Button buttonAfegir, buttonActualitzar, buttonDelete;
     EditText editNom, editAnada, editTipus, editLloc, editGraduacio, editData, editComentari, editBodega, editDenominacio, editPreu, editValOlfa, editValGusta, editValVisual, editNota, editFoto;
+    TextView ID;
     DataSourceVi bd;
 
     @Override
@@ -19,6 +21,7 @@ public class EditActivity extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
 
+        ID = (TextView) findViewById(R.id.ID);
         editNom = (EditText) findViewById(R.id.editNomVi);
         editAnada= (EditText) findViewById(R.id.editAnada);
         editTipus = (EditText) findViewById(R.id.editTextTipus);
@@ -39,10 +42,43 @@ public class EditActivity extends Activity implements View.OnClickListener {
         buttonAfegir.setOnClickListener(this);
         buttonActualitzar = (Button) findViewById(R.id.buttonActualitzar);
         buttonActualitzar.setOnClickListener(this);
+        buttonDelete = (Button) findViewById(R.id.buttonDelete);
+        buttonDelete.setOnClickListener(this);
+
+        Bundle bundle = getIntent().getExtras();
+        String id = bundle.getString("ID");
+        ID.setText(id);
+
+        if (!id.equals("")){
+            try {
+                bd.open();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            Vi vi = bd.getVi(Integer.parseInt(id));
+            RellenarVino(vi);
+            ActualizarVino();
+        } else {
+            InsertarVi();
+        }
     }
 
     @Override
     public void onClick(View v) {
+
+        if (v == buttonAfegir){
+            InsertarVi();
+        }
+
+        else if (v == buttonActualitzar){
+            ActualizarVino();
+        }
+
+        else if (v == buttonDelete){
+            DeleteVino();
+        }
+    }
+    public void InsertarVi(){
         String value= editNota.getText().toString();
         int nota = Integer.parseInt(value);
         String value2 = editBodega.getText().toString();
@@ -70,46 +106,85 @@ public class EditActivity extends Activity implements View.OnClickListener {
         vino.setNota(nota);
         vino.setFoto(editFoto.getText().toString());
 
-        if (v == buttonAfegir){
-            //Obrim la base de dades
-            bd = new DataSourceVi(this);
-            try {
-                bd.open();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-
-            bd.createVi(vino);
-            bd.close();
-            finish();
+        //Obrim la base de dades
+        bd = new DataSourceVi(this);
+        try {
+            bd.open();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
 
-        else if (v == buttonActualitzar){
+        bd.createVi(vino);
+        bd.close();
+        finish();
+    }
 
-            //Obtenim la BD
-            bd = new DataSourceVi(this);
-            try {
-                bd.open();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            
-            //Crida a la BD
-            boolean result = bd.updateVi(vino);
+    public void ActualizarVino(){
+        String value= editNota.getText().toString();
+        int nota = Integer.parseInt(value);
+        String value2 = editBodega.getText().toString();
+        long bodega = Long.parseLong(value2);
+        String value3 = editDenominacio.getText().toString();
+        long denominacio = Long.parseLong(value3);
+        String value4 = editNota.getText().toString();
+        float preu = Float.parseFloat(value4);
+        String valueID  = ID.getText().toString();
+        long id = Long.parseLong(valueID);
 
-            //Comprovem el resultat, si s’ha pogut actualitzar la BD o no
-            if (result)
-                Toast.makeText(this, "Element modificat", Toast.LENGTH_SHORT).show();
-            else
-                Toast.makeText(this, "No s’ha pogut modificar l’element", Toast.LENGTH_SHORT).show();
+        Vi vino = new Vi();
+        vino.setId(id);
+        vino.setNomVi(editNom.getText().toString());
+        vino.setAnada(editAnada.getText().toString());
+        vino.setLloc(editLloc.getText().toString());
+        vino.setTipus(editTipus.getText().toString());
+        vino.setGraduacio(editGraduacio.getText().toString());
+        vino.setData( editData.getText().toString());
+        vino.setComentari(editComentari.getText().toString());
+        vino.setIdBodega(bodega);
+        vino.setIdDenominacio(denominacio);
+        vino.setPreu(preu);
+        vino.setValOlfativa(editValOlfa.getText().toString());
+        vino.setValGustativa(editValGusta.getText().toString());
+        vino.setValVisual(editValVisual.getText().toString());
+        vino.setNota(nota);
+        vino.setFoto(editFoto.getText().toString());
 
-            //Tanquem la BD
-            bd. close();
-
-            //Tanca l’activitat.
-            finish();
-
+        //Obtenim la BD
+        bd = new DataSourceVi(this);
+        try {
+            bd.open();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+
+        //Crida a la BD
+        bd.updateVi(vino);
+        bd.close();
+        finish();
+    }
+
+    public void DeleteVino(){
+        String valueID  = ID.getText().toString();
+        long id = Long.parseLong(valueID);
+
+        Vi vino = new Vi();
+        vino.setId(id);
+
+        bd = new DataSourceVi(this);
+        try {
+            bd.open();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        //Crida a la BD
+        bd.deleteVi(vino);
+        bd.close();
+        finish();
+    }
+
+    public void RellenarVino(Vi vi){
+        editNom.setText(vi.getNomVi());
     }
 }
 
