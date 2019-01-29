@@ -217,6 +217,11 @@
             android:hint="Foto"
             android:inputType="textPersonName" />
 
+        <Spinner
+            android:id="@+id/spTipus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
         <TextView
             android:id="@+id/ID"
             android:layout_width="186dp"

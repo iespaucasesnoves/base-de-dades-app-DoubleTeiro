@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.support.constraint.solver.widgets.Helper;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -98,6 +99,19 @@ public class DataSourceVi {
         return vi;
     }
 
+    public List<String> getAllTipus(){
+        List<String> tipus = new ArrayList<String>();
+        Cursor cursor = database.query(HelperVi.TABLE_TIPUS, allColumnsVi, null, null, null, null, null
+        );
+        cursor.moveToFirst();
+        while(!cursor.isAfterLast()){
+            String tipo = String.valueOf(cursor);
+            tipus.add(tipo);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return tipus;
+    }
     public List<Vi> getAllVi() {
         List<Vi> vins = new ArrayList<Vi>();
         Cursor cursor = database.query(HelperVi.TABLE_VI, allColumnsVi, null, null, null, null,
@@ -134,4 +148,4 @@ public class DataSourceVi {
     }
 
     //CREAREM EL MÈTODES QUE ENS FACIN FALTA EN FUNCIÓ DE LA NOSTRA BASE DE DADES
-}
+    }

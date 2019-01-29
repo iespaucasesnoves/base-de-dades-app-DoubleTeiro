@@ -3,12 +3,15 @@ package com.example.alumne.appvino;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EditActivity extends Activity implements View.OnClickListener {
     Button buttonAfegir, buttonActualitzar, buttonDelete;
@@ -49,17 +52,14 @@ public class EditActivity extends Activity implements View.OnClickListener {
         String id = bundle.getString("ID");
         ID.setText(id);
 
+        //montaSpinners(id);
+
         if (!id.equals("")){
             try {
-                bd.open();
+                RellenarVino(id);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            Vi vi = bd.getVi(Integer.parseInt(id));
-            RellenarVino(vi);
-            ActualizarVino();
-        } else {
-            InsertarVi();
         }
     }
 
@@ -183,8 +183,62 @@ public class EditActivity extends Activity implements View.OnClickListener {
         finish();
     }
 
-    public void RellenarVino(Vi vi){
+    public void RellenarVino(String id) throws SQLException {
+
+        bd = new DataSourceVi(this);
+        bd.open();
+
+        long idA = Long.parseLong(id);
+
+        Vi vi = bd.getVi(idA);
         editNom.setText(vi.getNomVi());
+        editAnada.setText(vi.getAnada());
+        editLloc.setText(vi.getLloc());
+        editTipus.setText(vi.getTipus());
+        editGraduacio.setText(vi.getGraduacio());
+        editData.setText(vi.getData());
+        editComentari.setText(vi.getComentari());
+        editBodega.setText(String.valueOf(vi.getIdBodega()));
+        editDenominacio.setText(String.valueOf(vi.getIdDenominacio()));
+        editPreu.setText(String.valueOf(vi.getPreu()));
+        editValGusta.setText(vi.getValGustativa());
+        editValOlfa.setText(vi.getValOlfativa());
+        editValVisual.setText(vi.getValVisual());
+        editNota.setText(String.valueOf(vi.getNota()));
+        editFoto.setText(vi.getFoto());
+
+        //Crida a la BD
+        bd.close();
+        finish();
+
+    }
+
+    private void montaSpinners(String t) {
+        Spinner spinner = (Spinner) findViewById(R.id.spTipus);
+        /*List<String> tipus = new ArrayList<String>();
+        tipus.add("Tinto");
+        tipus.add("Blanc");*/
+        List<String> llista;
+        llista= bd.getAllTipus();
+        // Crear adapter
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, llista);
+        // Drop down estil – llista amb radio button
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // assignar adapter
+        spinner.setAdapter(dataAdapter);
+        if (t!= null && !t.equals("")) {
+            selectValue(spinner,t);
+        // Si hi ha un valor assignat posicionar-se
+        }
+    }
+    private void
+    selectValue(Spinner spinner, Object value) {
+        for (int i = 0; i < spinner.getCount(); i++) {
+            if (spinner.getItemAtPosition(i).equals(value)) {
+                spinner.setSelection(i);
+                break;
+            }
+        }
     }
 }
 
