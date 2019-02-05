@@ -1,6 +1,7 @@
 package com.example.alumne.appvino;
 
 import android.app.Activity;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -10,7 +11,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class EditActivity extends Activity implements View.OnClickListener {
@@ -51,8 +51,7 @@ public class EditActivity extends Activity implements View.OnClickListener {
         Bundle bundle = getIntent().getExtras();
         String id = bundle.getString("ID");
         ID.setText(id);
-
-        //montaSpinners(id);
+       // montaSpinners(id);
 
         if (!id.equals("")){
             try {
@@ -185,12 +184,11 @@ public class EditActivity extends Activity implements View.OnClickListener {
 
     public void RellenarVino(String id) throws SQLException {
 
+        long ide = Long.parseLong(id);
         bd = new DataSourceVi(this);
         bd.open();
 
-        long idA = Long.parseLong(id);
-
-        Vi vi = bd.getVi(idA);
+        Vi vi = bd.getVi(ide);
         editNom.setText(vi.getNomVi());
         editAnada.setText(vi.getAnada());
         editLloc.setText(vi.getLloc());
@@ -209,7 +207,6 @@ public class EditActivity extends Activity implements View.OnClickListener {
 
         //Crida a la BD
         bd.close();
-        finish();
 
     }
 

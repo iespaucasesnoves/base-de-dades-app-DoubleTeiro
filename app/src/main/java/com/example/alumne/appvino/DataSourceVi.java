@@ -105,6 +105,7 @@ public class DataSourceVi {
         );
         cursor.moveToFirst();
         while(!cursor.isAfterLast()){
+
             String tipo = String.valueOf(cursor);
             tipus.add(tipo);
             cursor.moveToNext();
@@ -132,18 +133,19 @@ public class DataSourceVi {
         v.setId(cursor.getLong(0));
         v.setNomVi(cursor.getString(1));
         v.setAnada(cursor.getString(2));
-        v.setLloc(cursor.getString(3));
-        v.setGraduacio(cursor.getString(4));
-        v.setData(cursor.getString(5));
-        v.setComentari(cursor.getString(6));
-        v.setIdBodega(cursor.getLong(7));
-        v.setIdDenominacio(cursor.getLong(8));
-        v.setPreu(cursor.getFloat(9));
-        v.setValOlfativa(cursor.getString(10));
-        v.setValGustativa(cursor.getString(11));
-        v.setValVisual(cursor.getString(12));
-        v.setNota(cursor.getInt(13));
-        v.setFoto(cursor.getString(14));
+        v.setTipus(cursor.getString(3));
+        v.setLloc(cursor.getString(4));
+        v.setGraduacio(cursor.getString(5));
+        v.setData(cursor.getString(6));
+        v.setComentari(cursor.getString(7));
+        v.setIdBodega(cursor.getLong(8));
+        v.setIdDenominacio(cursor.getLong(9));
+        v.setPreu(cursor.getFloat(10));
+        v.setValOlfativa(cursor.getString(11));
+        v.setValGustativa(cursor.getString(12));
+        v.setValVisual(cursor.getString(13));
+        v.setNota(cursor.getInt(14));
+        v.setFoto(cursor.getString(15));
         return v;
     }
 
